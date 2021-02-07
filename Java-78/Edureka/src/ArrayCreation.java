@@ -24,6 +24,11 @@ public class ArrayCreation {
 		names[1] = "Anil";
 		for(String name : names) {
 			System.out.print(name+"   ");
-		}		
+		}	
+		System.out.println();
+		System.out.println("1 + 2 = " + 1 + 2);
+		System.out.println("1 + 2 = " + (1 + 2));
+		System.out.println(1 + 2 + " = 3");
+
 	}
 }
