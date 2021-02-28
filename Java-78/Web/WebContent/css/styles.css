@@ -1,0 +1,28 @@
+body{
+	background-color:lightgreen;
+}
+table{
+	width:400px;
+	margin:100px auto;
+	background:linear-gradient(45deg,black,darkred);
+	color:white;
+	border-radius:15px;
+	box-shadow:0 0 10px black;
+	padding:10px;
+}
+tr{
+	height:45px;
+}
+table,input{
+	font-size:18px;
+}
+input[type=submit]{
+	background:transparent;
+	border:1px solid white;
+	padding:3px 25px;
+	color:white;
+	border-radius:15px;
+}
+input[type=submit]:hover{
+	box-shadow:0 0 10px white;
+}
