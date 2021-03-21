@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>edureka | account creation</title>
+<link rel="stylesheet" href="css/styles.css"/>
+</head>
+
+<body>
+ <div id="wrapper"> 
+  <form action="rest/account/newaccount" method="post"> 
+   <table>
+     <tr>
+       <td>
+        <label for="">A/C No</label>
+       </td>
+       <td>
+        <input type="text" name="acno" size="20" autofocus required>
+       </td>
+     </tr>
+
+     <tr>
+       <td>
+        <label for="">Name</label>
+       </td>
+       <td>
+        <input type="text" name="name" size=20>
+       </td>
+     </tr>
+     
+     <tr>
+       <td>
+        <label for="">Deposit</label>
+       </td>
+       <td>
+        <input type="text" name="bal" size=20>
+       </td>
+     </tr>     
+     <tr>
+       <td colspan="2" align="center">
+        <input type="submit" value="Create A/C">
+       </td>
+     </tr>
+     
+   </table>
+  </form>
+ </div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edureka>
+  <department name="admin">
+  	<employee>
+  	  <empno>101</empno>
+  	  <ename>Gopal</ename>
+  	  <sal>78500</sal>
+  	</employee>
+  	<employee>
+  	  <empno>102</empno>
+  	  <ename>Anirudh</ename>
+  	  <sal>68500</sal>
+  	</employee>
+  	<employee>
+  	  <empno>103</empno>
+  	  <ename>Christopher</ename>
+  	  <sal>58500</sal>
+  	</employee>  	  	
+  </department>
+</edureka>

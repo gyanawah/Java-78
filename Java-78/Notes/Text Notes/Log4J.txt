@@ -1,0 +1,247 @@
+Logging is the process of writing log messages during the execution of a program to a central place
+
+This logging allows you to report and persist error and warning messages as well as info messages (eg: runtime statistics) so that the messages can be later retrieved and analyzed
+
+This is very helpful to understand exceptions in the application which are deployed in higher environments like SIT, UAT, PILOT and Production etc
+
+UAT and SIT are the two different levels of testing in the application testing phase of QA. 
+UAT stands for "User Acceptance Testing" and SIT stand for "System Integration Testing".
+
+
+Using System.out.println
+
+public class ReportGenerator
+{
+  public void generateReport(){
+    System.out.println("Method execution started");
+    // business logic
+    System.out.println("Method execution ended");
+  }
+}
+
+
+Drawbacks of System.out.println
+
+If we use System.out.println() statements to print log messages, then we can run into some disadvantages
+ - we can print the log messages on the console only. So, when the console is closed we will lose all of those messages
+ - We cannot store log messages in permanent place. These messages will print one by one on the console because it is single threaded environment
+
+To overcome these problems , the Log4J frame is used which is an open source framework provided by Apache for Java Projects
+
+Log4J Introduction
+------------------
+Apache Log4J is a Java based logging Utility
+- It is a part of Apache Logging Services Project of the Apache Software Foundation
+Log4J is one of the several Java logging frameworks
+Log4J is reliable, fast and flexible logging framework (APIs) written in Java, which is distributed under the Apache Software Licence
+
+Pros & Cons of Logging
+----------------------
+an important component of software development
+A well written logging code offers quick debugging, easy maintenance, and structured storage of an application's runtime information
+
+Logging can slow down an application
+
+
+
+Log4J Components
+----------------
+3 main components
+1) Loggers - Responsible for capturing logging information
+2) Appenders - Responsible for publishing information to various preferred destinations (file, console, email, database etc)
+3) Layouts - Responsible for formatting logging information in different styles(a log message with date, class name, method name , line no etc)
+
+Logger Object          Layout Object
+
+              Appender Object
+
+               Destination
+              (File/Console/Email/Database/JMS)
+
+
+
+Logger
+------
+- is a class in the org.apache.log4j   package
+
+We have to initialize one logger object for each java class. We use Logger's method to generate log statements. Log4J provides the factory method to get Logger Objects
+
+static Logger logger = Logger.getLogger(CurrentClass.class.getName());
+
+
+public class ReportGenerator
+{
+  private static final Logger logger = Logger.getLogger(ReportGenerator.class);
+
+  public void generateReport(){
+   //logic goes here
+  }
+}        
+
+
+Logging Levels:
+ALL
+DEBUG
+INFO
+WARN
+ERROR
+FATAL
+OFF
+TRACE
+
+https://www.javatpoint.com/log4j-logging-levels
+
+How do log levels work?
+
+A log request of level p in a logger with level q is enabled of p >= q. This rule is at the heart of Log4J
+It assumes that levels are ordered. For the standard levels, we have ALL < DEBUG < INFO < WARN < ERROR < FATAL < OFF
+
+Log Level Order
+<pic>
+
+Appender
+Appenders are used to write messages into a file or console or DB or SMTP
+Log4J has different type of appenders:
+-ConsoleAppender
+-FileAppender
+-JDBCAppender
+-SMTPAppender
+
+Layout
+- used to define the formatting in which logs will print in a repository
+We have different types of Layouts
+-PatternLayout
+-SimpleLayout
+-XMLLayout
+-HTMLLayout
+
+Steps to plug in log4j into project:
+------------------------------------
+1) Download latest log4j distribution /  use maven configuration
+2) Add log4j's jar library into your projects classpath
+3) Create log4j's configuration
+4) Initialize log4j with the configuration
+5) Create a logger
+6) Put logging statements into your code
+
+Maven Condfigration
+<dependency>
+    <groupId>log4j</groupId>
+    <artifactId>log4j</artifactId>
+    <version>1.2.17</version>
+</dependency>
+
+
+Log4J Configurations
+1) Basic Configuration
+2) Using Properties file
+3) Using XML file
+4) Programmatic Configuration
+
+Demo
+1) Create a New Maven Project
+2) Include log4j dependency in pom.xml
+3) Create a Package
+4) New Class - ReportGenerator
+
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+
+public class ReportGenerator {
+	//initializing Logger object for current class
+	private static Logger logger = Logger.getLogger(ReportGenerator.class);
+
+	public static void main(String[] args) {
+		//Using Basic Configuration
+		BasicConfigurator.configure();
+		logger.trace("This is trace message"); //TRACE LEVEL message
+		logger.debug("This is debug message"); //DEBUG Level message
+		logger.info("This is info message");
+		logger.warn("This is warn message");
+		logger.error("This is error message");
+		logger.fatal("This is fatal message"); //FATAL LEVEL message - blocker issue
+	}
+}
+
+The output contains the time elapsed from the start of the program in milliseconds, the thread name, the logger level, the class name and the log message. 
+
+logger.setLevel(Level.WARN);
+
+
+Properties file configuration
+-----------------------------
+- To configure log4j from an external .properties file, invoke the static method configure() of the class PropertyConfigurator
+
+PropertyConfigurator.configure(String configFilename)
+
+log4j.rootLogger = DEBUG, console
+log4j.appender.console=org.apache.log4j.ConsoleAppender
+log4j.appender.console.layout=org.apache.log4j.PatternLayout
+%d{dd-MMM-yyyy hh:mm:ss z} [%t] - %c %M - %m %n
+
+%d - date and time
+%t - thread name
+%c - class name
+%M - method name
+%m - Message 
+%n - new line
+%C - fully qualified class name
+%F - File Name
+
+Properties File for FileAppender
+
+# File Configuration
+log4j.rootLogger = DEBUG, file
+log4j.appender.file=org.apache.log4j.FileAppender
+log4j.appender.file.layout=org.apache.log4j.PatternLayout
+log4j.appender.file.File=AppLogs.log
+log4j.appender.file.layout.ConversionPattern=%d{dd-MMM-yyyy hh:mm:ss z} [%t] -5p %c %M - %m %n
+
+
+Demo:
+
+log4j.properties
+
+#Console Configuration
+log4j.rootLogger = DEBUG, console
+log4j.appender.console=org.apache.log4j.ConsoleAppender
+log4j.appender.console.layout=org.apache.log4j.PatternLayout
+log4j.appender.console.layout.ConversionPattern=%d{dd-MMM-yyyy hh:mm:ss z} [%t] - %c %M - %m %n
+
+package co.edureka;
+
+import java.io.File;
+
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
+public class ReportGenerator1 {
+	//initializing Logger object for current class
+	private static Logger logger = Logger.getLogger(ReportGenerator.class);
+
+	public static void main(String[] args) {
+		
+		//Using Property Configuration
+		PropertyConfigurator.configure(System.getProperty("user.dir")+File.separator+"log4j.properties");
+		
+		logger.trace("This is trace message"); //TRACE LEVEL message
+		logger.debug("This is debug message"); //DEBUG Level message
+		logger.info("This is info message");
+		logger.warn("This is warn message");
+		logger.error("This is error message");
+		logger.fatal("This is fatal message");
+	}
+}
+
+----------------------
+log4j.properties
+
+# File Configuration
+log4j.rootLogger = DEBUG, file
+log4j.appender.file=org.apache.log4j.FileAppender
+log4j.appender.file.layout=org.apache.log4j.PatternLayout
+log4j.appender.file.File=AppLogs.log
+log4j.appender.file.layout.ConversionPattern=%d{dd-MMM-yyyy hh:mm:ss z} [%t] -5p %c %M - %m %n
+
+
