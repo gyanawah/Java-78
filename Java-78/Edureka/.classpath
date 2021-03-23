@@ -8,5 +8,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/oraclexe/app/oracle/product/11.2.0/server/jdbc/lib/ojdbc5.jar"/>
 	<classpathentry kind="lib" path="E:/Edureka/Java/Softwares/mysql-connector-java-5.1.43/mysql-connector-java-5.1.43-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SUNIL/.m2/repository/log4j/log4j/1.2.12/log4j-1.2.12.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,0 +1,35 @@
+body{
+  background-color:lightblue;
+}
+#wrapper
+{
+  width:400px;
+  background:linear-gradient(45deg,black,darkred);
+  color:white;
+  padding:10px;
+  border-radius:15px;
+  box-shadow:0 0 10px black;
+  font-size:18px;
+  margin:100px auto;	
+}
+#wrapper table{
+  width:100%;	
+}
+tr{
+	height:40px;
+}
+input{
+	font-size:18px;
+}
+input[type="submit"]{
+	background:transparent;
+	color:white;
+	border:1px solid white;
+	width:120px;
+	padding:5px;
+	border-radius:15px;
+	margin-top:10px;
+}
+input[type="submit"]:hover{
+	box-shadow:0 0 10px white;
+}
